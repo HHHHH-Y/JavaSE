@@ -66,10 +66,84 @@ public class TestDemo{
 	}
 
 	/**
-	 * 单精度浮点型
+	 * 单精度浮点型(float) 占4个字节
+	 * float --> Float
+	 * @param args [description]
+	 */
+	public static void main5(String[] args) {
+		// float a = 2.5;
+		// System.out.println(a); // 从double转到float会有损失
+		// float a = 2.5f;
+		// System.out.println(a); // 2.5
+	}
+
+	/**
+	 * 字符类型变量(char) 占2个字节 范围为 0 ~ 65535
+	 * char --> Character
+	 * 在java中使用的是Unicode表, 这包含了ASCII表, 比ASCII表更大. 因此char占了2个字节
+	 * @param args [description]
+	 */
+	public static void main6(String[] args) {
+		// char ch = 'a';
+		// System.out.println(ch); // a
+		// char ch1 = 97;
+		// System.out. println(ch1); // a
+		// char ch2 = '凡';
+		// System.out.println(ch2); // 凡
+	}
+
+	/**
+	 * 字节类型变量(byte) 占一个字节 范围为 -128 ~ + 127
+	 * byte --> Byte
+	 * 每一种数据类型, 在给其赋值的时候, 一定不能超过他的范围
+	 * @param args [description]
+	 */
+	public static void main7(String[] args) {
+		// byte b = 0;
+		// System.out.println(b);
+		// System.out.println(Byte.MAX_VALUE); // 127
+		// System.out.println(Byte.MIN_VALUE); // -128
+		
+		//byte b = 130; 
+
+	}
+
+	/**
+	 * 短整形(short) 占2个字节 范围是 -32768 ~ +32767
+	 * short --> Short
+	 * @param args [description]
+	 */
+	public static void main8(String[] args) {
+		// short s = 12;
+		// System.out.println(s); // 12
+		// System.out.println(Short.MAX_VALUE); // 32767
+		// System.out.println(Short.MIN_VALUE); // 32768
+	}
+
+	/**
+	 * 布尔类型的变量(boolean) 
+	 * 1. 在java中, 布尔类型没有明确规定占几个字节
+	 * 2. 在java中, 布尔类型只有两种取值: true 和 false
+	 * 3. 在java中, 没有所谓的 0为假, 非0为真
+	 * boolean --> Boolean
+	 * @param args [description]
+	 */
+	public static void main9(String[] args) {
+		// boolean flg = false;
+		// System.out.println(flg);
+		// if(1){
+		// 	// 错误
+		// 	// boolean不能用0 或者 1 来代替
+		// }
+	}
+
+	/**
+	 * 字符串数据类型(String)
 	 * @param args [description]
 	 */
 	public static void main(String[] args) {
+		String str = "hello";
+		System.out.println(str); // hello
 		
 	}
 }
