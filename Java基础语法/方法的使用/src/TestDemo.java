@@ -1,8 +1,51 @@
 import com.sun.xml.internal.ws.api.model.wsdl.WSDLOutput;
-
 import java.util.Scanner;
 
+
 public class TestDemo {
+    public static int factor(int n) {
+        int sum = 0;
+        for (int i = 1; i <= n ; i++) {
+           /* int ret = 1;
+            for (int j = 1; j <= i ; j++) {
+                ret *= j;
+            }*/
+            sum += fac(i);
+        }
+        return sum;
+    }
+    public static int fac(int num) {
+        int ret = 1;
+        for (int i = 1; i <= num ; i++) {
+            ret *= i;
+        }
+        return ret;
+    }
+
+    /**
+     * return 代表函数的结束, 它下面的代码将不会被执行
+     * 一个方法可以被调用多次
+     */
+    public static void main(String[] args) {
+        // 计算 1! + 2! + 3! + 4! + 5!
+        System.out.println(factor(5));
+    }
+
+
+    public static int sum(int a, int b) {
+        return a + b;
+    }
+
+    public static void main5(String[] args) {
+        int a = 10;
+        int b = 20;
+        int ret = sum(a, b);
+        System.out.println(ret);
+        int ret1 = sum(20, 80);
+        System.out.println(ret1);
+    }
+
+
     /**
      * java 的方法对应的就是 C语言当中的函数
      * 方法: 功能
