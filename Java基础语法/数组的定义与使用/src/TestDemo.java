@@ -1,6 +1,7 @@
 import java.util.Arrays;
 
 public class TestDemo {
+
     public static void main(String[] args) {
         // 自己实现一个数组转字符串的方法
         int[] arr = {1, 2, 3, 4, 5};
@@ -21,8 +22,6 @@ public class TestDemo {
         ret += "]";
         return ret;
     }
-
-
     /**
      * 将数组以字符串的形式输出
      * Arrays 把它叫做操作数组的工具类
@@ -68,6 +67,8 @@ public class TestDemo {
         }
     }
 
+
+
     public static void main2(String[] args) {
         // 通过for循环来遍历数组元素
         int[] array = {1, 2, 3, 4};
@@ -83,6 +84,7 @@ public class TestDemo {
             System.out.print(j + " "); // 1 2 3 4
         }
     }
+
 
     /**
      * 数组的定义
