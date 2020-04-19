@@ -155,9 +155,9 @@ public class Test {
 
 **一般在无特殊要求下, 都用private来对成员变量进行封装**
 
-**只要数据成员被private修饰以后, 就只能在它所在的类中使用, 在类外若想访问这些数据成员, 就需要在类中提供两个public类的接口(getter / setter方法)**
+**只要数据成员被private修饰以后, 就只能在它所在的类中使用, 在类外若想访问这些数据成员, 就需要在类中提供两个public类的接口(get / set方法)**
 
-通过getter / setter方法去访问封装了的数据成员
+通过get / set方法去访问封装了的数据成员
 
 ```java
 class Person {
@@ -194,4 +194,209 @@ public class Test {
 关于this关键字:
 
 this 是当前对象的引用, 要习惯使用 this.
+
+## 4. 构造方法
+有一个问题: 一个对象的产生分为几步? 他是怎样产生的?
+答案为: 两步   1. 给对象分配内存;      2. 调用合适的构造方法
+
+那么什么是构造方法?
+构造方法是一种特殊的的方法, 使用关键字new实例化对象的时候, 就会自动调用构造方法, 用于完成初始化的操作.
+
+构造方法的构造要求: 
+构造方法名与类名相同, 并且没有返回值
+```java 
+class Person {
+    private String name;
+    private int age;
+
+    // 构造方法
+    public Person () {
+        System.out.println("person");
+    }
+}
+public class Test {
+    public static void main(String[] args) {
+       Person person = new Person();
+    }
+}
+```
+
+构造方法可以是一个, 也可以是多个.
+
+**若自己未在代码中定义构造方法, 编译器将会默认自带一个无参的构造方法. 若自己定义了构造方法, 编译器将不再赠送构造方法**
+
+构造方法可以是无参的构造方法, 也可以是有参构造方法, 由构造方法的构造可知, 它完全符合重载的要求
+
+所以,  **构造方法可以进行重载**
+
+```java
+class Person{
+    private String name;
+    private int age;
+
+    // 构造方法
+    public Person() { // 不带参数的构造方法
+        System.out.println("person");
+    }
+    
+    public Person(String name, int age) { // 带有参数的构造方法
+        System.out.println("person || String || age");
+    }
+}
+public class Test {
+    public static void main(String[] args) {
+       c
+        Person person = new Person("zhangsan",18);
+    }
+}
+```
+
+### this关键字的简单介绍
+
+这里我们从一个问题入手: **this代表一个对象, 这句话对不对?**
+
+**这句话是错误的**
+
+这里展示一段代码:
+
+```java
+class Person{
+    private String name;
+    private String age;
+
+    // 构造方法
+   public Person() {
+       this.name = "zhangsan";
+       this.age = 18;
+       System.out.println(name + " " + age);
+   }
+}
+public class TestDemo03 {
+    public static void main(String[] args) {
+        Person person = new Person();
+    }
+}
+```
+
+我们知道, 一个对象要产生, 首先就要先给对象分配内存, 然后再调用合适的构造方法. 但是从这段代码中我们可以看出, 在构造方法中就已经使用了this关键字, 而这个时候, 对象还没有完全创建好. 所以, this代表一个对象是错误的
+
+那么,this到底代表什么呢? **this代表的是当前对象的引用(this写在哪个类, 就代表哪个类的对象的引用)**
+
+### 构造方法还可以调用构造方法
+
+```java
+  public Book() {
+        this("木偶奇遇记", "10697061418"); // 调用了有参的构造方法
+        this.name = "鲁宾逊漂流记";
+        this.id = "10697061419";
+        System.out.println("name = " + name + ", " + "id = " + id);
+    }
+    // 有参的构造方法
+    public Book(String name, String id) {
+        this.name = name;
+        this.id = id;
+        System.out.println("name = " + name + ", " + "id = " + id);
+    }
+```
+
+**调用构造方法, 需要使用 this( ) 来调用自己的构造方法**
+
+**注意: 1. this( ) 只能在构造方法里面写**
+
+​          **2. 调用构造方法的时候, 只能调用一次**
+
+​          **3. 调用的时候只能写在第一行**
+
+
+
+## 5. 代码块
+
+代码块分为3种: 1. 静态代码块
+
+​                           2. 实例代码块(构造代码块)
+
+​                           3.本地代码块
+
+我们着重介绍前两个代码块
+
+```java
+class Person {
+    private String name;
+    private int age;
+     // 构造方法 
+    public Person() {
+        System.out.println("person");
+    }
+    
+    // 实例代码块
+    {
+        System.out.println("实例代码块");
+    }
+    
+    // 静态代码块(使用static定义的代码块)
+    static {
+        System.out.println("静态代码块 ");
+    }
+}
+
+public class TestDemo04 {
+    public static void main(String[] args) {
+         Person person = new Person();
+    }
+}
+```
+
+运行结果为:
+
+```
+静态代码块 
+实例代码块
+teacher
+```
+
+由运行结果可知: 不论静态代码块, 实例代码块, 构造方法如何分布, 在访问的时候都是优先访问静态代码块, 再下来是实例代码块, 之后才是构造方法
+
+注意: 无论创建多少个对象, 静态代码块都只执行一次, 并且是最先执行的
+
+如果一个类中存在两个或者多个静态类的数据成员, 那么他们被访问的顺序按照他们定义的先后顺序
+
+## 6. 匿名对象
+
+匿名表示没有名字的对象
+
+没有引用的对象称为匿名对象
+
+匿名对象只能在创建对象时使用
+
+如果一个对象只用一次, 之后就不再使用了, 可以考虑使用匿名对象
+
+```java
+class Animal {
+    private String name = "晶晶";
+    private String sex = "母";
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getSex() {
+        return sex;
+    }
+
+    public void setSex(String sex) {
+        this.sex = sex;
+    }
+}
+public class TestDemo05 {
+    public static void main(String[] args) {
+        // 匿名对象
+        System.out.println(new Animal().getName());
+        System.out.println(new Animal().getSex());
+    }
+}
+```
 
