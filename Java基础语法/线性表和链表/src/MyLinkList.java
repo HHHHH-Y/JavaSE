@@ -117,4 +117,61 @@ public class MyLinkList {
         node.next = cur.next;
         cur.next = node;
     }
+
+    // 删除第一次出现关键字为key的节点
+    public void remove(int key) {
+        // 1. 如果关键字为key的节点就是第一个节点
+        // 1. 找到关键字为key的节点的上一个节点
+        // 2. 然后进行删除
+        if(this.head.data == key) {
+            this.head = this.head.next;
+            return;
+        }
+        Node cur = this.head;
+        while (cur.next.data != key) {
+            cur = cur.next;
+        }
+        cur.next = cur.next.next;
+    }
+
+    // 删除所有值为key的节点
+    public void removeAllKey(int key) {
+        // 1. 判断第一个节点的关键字是否为key, 若是, 就挪动head, 一直挪动到不是关键字key的节点即可
+        // 2. 需要创建两个引用, 一个用来找含有key的节点, 一个用来删除key节点
+        // 3. 如果最后一个节点也为key, 直接让上一个节点的next置为空即可
+        Node cur = this.head;
+        while (this.head.data == key) {
+            this.head = this.head.next;
+            cur = this.head;
+        }
+        // this.head.data != key
+        Node cur1 = this.head;
+        cur = this.head.next;
+        while(cur != null) {
+            if(cur.data == key && cur.next != null) {
+                cur1.next = cur.next;
+                cur = cur.next;
+            }
+            if(cur.data == key && cur.next == null) {
+                cur1.next = null;
+                break;
+            }
+            if(cur.data != key) {
+                cur = cur.next;
+                cur1 = cur1.next;
+            }
+        }
+    }
+
+    // 清空单链表
+    public void clear() {
+        // 1. 如果单链表不止有一个节点的话, 就让head.next = null
+        // 2. 让cur = cur.next, 然后让head指向cur
+        if(this.head.next != null) {
+            this.head.next = null;
+        }
+        Node cur = this.head;
+        cur  = cur.next;
+        this.head = cur;
+    }
 }
