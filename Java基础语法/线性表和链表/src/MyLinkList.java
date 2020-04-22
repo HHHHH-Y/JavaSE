@@ -120,46 +120,51 @@ public class MyLinkList {
 
     // 删除第一次出现关键字为key的节点
     public void remove(int key) {
-        // 1. 如果关键字为key的节点就是第一个节点
-        // 1. 找到关键字为key的节点的上一个节点
-        // 2. 然后进行删除
+        // 1. 如果这个关键字出现在第一个节点, 直接使head指向下一个节点即可
+        // 2. 如果关键字不出现在第一个节点, 定义一个引用, 通过引用来判断是够等于关键字key, 是就删除
+        // 3. 如果关键字是出现在最后一个节点, 直接将引用的next置为null即可
         if(this.head.data == key) {
             this.head = this.head.next;
             return;
         }
+        // key不是第一个节点的时候
         Node cur = this.head;
-        while (cur.next.data != key) {
+        while (cur.next != null) {
+            if(cur.next.data == key) {
+                cur.next= cur.next.next;
+                return;
+            }
             cur = cur.next;
         }
-        cur.next = cur.next.next;
+        // cur已经指向了最后一个节点
+        cur.next = null;
     }
 
     // 删除所有值为key的节点
     public void removeAllKey(int key) {
-        // 1. 判断第一个节点的关键字是否为key, 若是, 就挪动head, 一直挪动到不是关键字key的节点即可
-        // 2. 需要创建两个引用, 一个用来找含有key的节点, 一个用来删除key节点
-        // 3. 如果最后一个节点也为key, 直接让上一个节点的next置为空即可
-        Node cur = this.head;
+        // 1. 若删除的值为key的节点在head处就出现了的话, 直接改变head的指向, 直到head的data不为key为止
+        // 2. 定义两个引用, 一个引用用来寻找值为key的节点, 一个引用用来表示它的前一个节点
+        //    如果第一个引用找到了关键字为key的节点, 就通过另一个引用删掉
+        // 3. 如果在最后一个节点的值仍未key, 就使其前一个节点的next直接置为null
         while (this.head.data == key) {
             this.head = this.head.next;
-            cur = this.head;
         }
-        // this.head.data != key
+        // head.data != key
         Node cur1 = this.head;
-        cur = this.head.next;
-        while(cur != null) {
-            if(cur.data == key && cur.next != null) {
+        Node cur =this.head.next;
+        while (cur.next != null) {
+            if(cur.data == key) {
                 cur1.next = cur.next;
                 cur = cur.next;
-            }
-            if(cur.data == key && cur.next == null) {
-                cur1.next = null;
-                break;
-            }
-            if(cur.data != key) {
+            } else {
                 cur = cur.next;
                 cur1 = cur1.next;
             }
+
+        }
+        // cur.next == null
+        if(cur.data == key) {
+            cur1.next = null;
         }
     }
 
