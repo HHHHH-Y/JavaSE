@@ -123,6 +123,9 @@ public class MyLinkList {
         // 1. 如果这个关键字出现在第一个节点, 直接使head指向下一个节点即可
         // 2. 如果关键字不出现在第一个节点, 定义一个引用, 通过引用来判断是够等于关键字key, 是就删除
         // 3. 如果关键字是出现在最后一个节点, 直接将引用的next置为null即可
+        if(this.head == null) {
+            return;
+        }
         if(this.head.data == key) {
             this.head = this.head.next;
             return;
@@ -146,37 +149,24 @@ public class MyLinkList {
         // 2. 定义两个引用, 一个引用用来寻找值为key的节点, 一个引用用来表示它的前一个节点
         //    如果第一个引用找到了关键字为key的节点, 就通过另一个引用删掉
         // 3. 如果在最后一个节点的值仍未key, 就使其前一个节点的next直接置为null
-        while (this.head.data == key) {
-            this.head = this.head.next;
-        }
-        // head.data != key
-        Node cur1 = this.head;
-        Node cur =this.head.next;
-        while (cur.next != null) {
+        Node prev = this.head;
+        Node cur = this.head.next;
+        while (cur != null) {
             if(cur.data == key) {
-                cur1.next = cur.next;
+                prev.next = cur.next;
                 cur = cur.next;
             } else {
+                prev = cur;
                 cur = cur.next;
-                cur1 = cur1.next;
             }
-
         }
-        // cur.next == null
-        if(cur.data == key) {
-            cur1.next = null;
+        if(this.head.data == key) {
+            this.head = this.head.next;
         }
     }
 
     // 清空单链表
     public void clear() {
-        // 1. 如果单链表不止有一个节点的话, 就让head.next = null
-        // 2. 让cur = cur.next, 然后让head指向cur
-        if(this.head.next != null) {
-            this.head.next = null;
-        }
-        Node cur = this.head;
-        cur  = cur.next;
-        this.head = cur;
+        this.head = null;
     }
 }

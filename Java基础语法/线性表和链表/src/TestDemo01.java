@@ -9,11 +9,11 @@ public class TestDemo01 {
         MyLinkList myLinkList = new MyLinkList();
         myLinkList.addFirst(77);
         myLinkList.addFirst(66);
-        myLinkList.addFirst(55);
+        myLinkList.addFirst(77);
         myLinkList.addFirst(77);
         myLinkList.addFirst(33);
         myLinkList.print();
-        myLinkList.addFirst(22);
+        myLinkList.addFirst(77);
         myLinkList.print();
 //        System.out.println("=============");
 //        System.out.println("=============");
@@ -30,9 +30,9 @@ public class TestDemo01 {
 //        System.out.println("=============");
 //        myLinkList.removeAllKey(44);
 //        myLinkList.removeAllKey(66);
-//        myLinkList.removeAllKey(77);
-//        myLinkList.print();
-        myLinkList.clear();
+        myLinkList.removeAllKey(77);
         myLinkList.print();
+//        myLinkList.clear();
+//        myLinkList.print();
     }
 }
