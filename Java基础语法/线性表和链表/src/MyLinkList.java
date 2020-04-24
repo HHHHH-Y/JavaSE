@@ -118,11 +118,23 @@ public class MyLinkList {
         cur.next = node;
     }
 
+    // 找到要删除的节点的前一个节点
+    private Node searchPrev(int key) {
+        Node prev = this.head;
+        while (prev.next != null) {
+            if(prev.next.data == key) {
+                return prev;
+            } else {
+                prev = prev.next;
+            }
+        }
+        return null;
+    }
     // 删除第一次出现关键字为key的节点
     public void remove(int key) {
-        // 1. 如果这个关键字出现在第一个节点, 直接使head指向下一个节点即可
-        // 2. 如果关键字不出现在第一个节点, 定义一个引用, 通过引用来判断是够等于关键字key, 是就删除
-        // 3. 如果关键字是出现在最后一个节点, 直接将引用的next置为null即可
+        // 1. 如果单链表为空, 就不能进行删除操作
+        // 2. 如果要删除的关键字恰好在第一个节点, 直接挪动head即可
+        // 3. 删除的关键字在第一个节点之后, 直接让前一个节点的next = 要删除节点的next
         if(this.head == null) {
             return;
         }
@@ -130,25 +142,19 @@ public class MyLinkList {
             this.head = this.head.next;
             return;
         }
-        // key不是第一个节点的时候
-        Node cur = this.head;
-        while (cur.next != null) {
-            if(cur.next.data == key) {
-                cur.next= cur.next.next;
-                return;
-            }
-            cur = cur.next;
+        Node prev = searchPrev(key);
+        if(prev == null) {
+            System.out.println("根本没有这个节点");
+            return;
         }
-        // cur已经指向了最后一个节点
-        cur.next = null;
+        Node del = prev.next;
+        prev.next = del.next;
     }
 
     // 删除所有值为key的节点
     public void removeAllKey(int key) {
-        // 1. 若删除的值为key的节点在head处就出现了的话, 直接改变head的指向, 直到head的data不为key为止
-        // 2. 定义两个引用, 一个引用用来寻找值为key的节点, 一个引用用来表示它的前一个节点
-        //    如果第一个引用找到了关键字为key的节点, 就通过另一个引用删掉
-        // 3. 如果在最后一个节点的值仍未key, 就使其前一个节点的next直接置为null
+        // 定义两个引用, 一个用于寻找值为key的节点, 另一个在这个寻找节点之前, 用于删除key节点
+        // 还需要判断一下头节点的值是否为key, 若是, 只需要挪动head即可
         Node prev = this.head;
         Node cur = this.head.next;
         while (cur != null) {
