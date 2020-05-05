@@ -13,7 +13,7 @@ import java.util.Arrays;
  * User: HHH.Y
  * Date: 2020-04-30
  */
-// < >: <>中的东西代表的是你要比较的是什么
+// < >: <>中代表的是泛型. 但在这里, <>中的东西代表的是你要比较的是什么类
 class Student implements Comparable <Student>{
     public String name;
     public int age;
