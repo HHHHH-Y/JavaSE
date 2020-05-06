@@ -7,7 +7,7 @@ import java.util.Scanner;
 
 /**
  * Created with IntelliJ IDEA.
- * Description:
+ * Description: 借阅图书
  * User: HHH.Y
  * Date: 2020-05-02
  */

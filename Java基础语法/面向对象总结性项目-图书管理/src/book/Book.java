@@ -61,6 +61,7 @@ public class Book {
         isBorrowed = borrowed;
     }
 
+    // 因为要打印出这本书的各个属性, 所以要重写toString方法
     @Override
     public String toString() {
         return "Book{" +
