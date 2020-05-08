@@ -19,6 +19,8 @@ package demo;
  * 比较字符串的内容是否相同
  */
 
+import java.lang.reflect.Field;
+
 /**
  * intern():
  * 从现象上来看: 手动入池
@@ -27,7 +29,48 @@ package demo;
  * 不存在的情况就是: 使用scanner进行输入字符串, 然后在常量池中加入该字符串, 然后再返回给当前的引用类型.
  */
 public class TestDemo1 {
-    public static void main(String[] args) {
+    /**
+     * 反射可以修改私有的属性或者方法
+     * 通过反射的方式将字符串"Hello"改写成"hello"的形式, 也就是说, 修改字符串的内容
+     * @param args
+     */
+    public static void main(String[] args) throws NoSuchFieldException, IllegalAccessException {
+        // 1. 通过原来的字符串, 创建新的字符串
+        String str = "Hello";
+//        str = "hello";
+//        str = "h" + str.substring(1);
+//        System.out.println(str);
+
+        // 2. 利用反射 --> 就是一个自省的过程
+
+        // 1. 拿到这个类的class对象
+        Class cl = String.class;
+        // 2. 拿到String的value字段
+        Field field = cl.getDeclaredField("value");
+        // 3. 将私有权限设置为true, 就可以对它进行修改了.
+        field.setAccessible(true);
+        char[] val = (char[]) field.get(str);
+        val[0] = 'h';
+        System.out.println(str);
+    }
+
+
+
+    /**
+     * 在进行拼接的时候, 会产生大量的临时变量, 占用内存. 所以一般情况下, 不采用这种形式进行字符串的拼接
+     * 若要进行字符串拼接, 一般情况下, 我们会采用 StringBuffer 或者 StringBuilder 来进行拼接
+     * @param args
+     */
+    public static void main4(String[] args) {
+        // 不推荐这样进行字符串的拼接
+        String str = "hello"; // hello
+        str += "world"; // world, helloword
+        str += "!!!"; // !!!   helloworld!!!
+        System.out.println(str);
+    }
+
+
+    public static void main3(String[] args) {
         String str1 = "hello";
         String str2 = new String("hello").intern();
         System.out.println(str1  == str2); // true
