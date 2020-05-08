@@ -9,6 +9,7 @@ package demo1;
 public class TestDemo2 {
     /**
      * 字符串的其他截取方法
+     *
      * @param args
      */
     public static void main(String[] args) {
@@ -18,9 +19,11 @@ public class TestDemo2 {
         System.out.println(ret);
     }
 
+    //hello
 
     /**
      * 字符串的截取
+     *
      * @param args
      */
     public static void main3(String[] args) {
@@ -36,6 +39,7 @@ public class TestDemo2 {
 
     /**
      * 2. 字符串的替换
+     *
      * @param args
      */
     public static void main2(String[] args) {
@@ -58,6 +62,7 @@ public class TestDemo2 {
 
     /**
      * 1. 字符串的比较(比较的是字符串的内容)
+     *
      * @param args
      */
     public static void main1(String[] args) {
