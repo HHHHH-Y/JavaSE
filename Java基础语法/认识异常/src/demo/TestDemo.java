@@ -7,7 +7,7 @@ package demo;
  * Throwable 类是JAVA语言中所有错误和异常的父类
  *
  * Throwable 类又分为 Error类和 Exception类
- * Error类: 必须由程序员自己解决
+ * Error类: 是指Java运行时的内部错误或者资源耗尽错误, 必须由程序员自己解决
  * Exception类: 可以由程序自己解决
  *
  * 关于异常, 又分为如下两种:
